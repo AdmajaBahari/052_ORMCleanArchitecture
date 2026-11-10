@@ -64,3 +64,6 @@ function validateParams(schema) {
         next();
     };
 }
+
+
+module.exports = {komikSchema, idSchema, validateBody, validateParams};
