@@ -204,35 +204,53 @@ Contoh respons validasi (`400`):
 
 ## Pengujian
 
-Semua endpoint diuji menggunakan Postman. Urutan yang disarankan: `POST` (tambah data), `GET` semua, `GET` by ID, `PUT`, `DELETE`, lalu `GET` by ID lagi untuk memastikan data sudah terhapus (`404`).
+Semua endpoint diuji menggunakan Postman. Urutan pengujian: `POST` (tambah data), `GET` semua, `GET` by ID, `PUT`, `DELETE`.
 
-### GET semua komik (200)
+### Hasil pengujian (berhasil)
+
+#### GET semua komik (200)
 
 Data yang tersimpan di PostgreSQL berhasil ditampilkan.
 
 ![GET semua komik](docs/images/get-all-200.png)
 
-### POST tambah komik (201)
+#### POST tambah komik (201)
 
 Data komik baru berhasil dibuat dan `id` bertambah otomatis.
 
 ![POST tambah komik](docs/images/post-201.png)
 
-### GET komik berdasarkan ID, data tidak ditemukan (404)
+#### GET komik berdasarkan ID (200)
 
-Permintaan ke `/api/komik/1` mengembalikan `404 Komik not found` karena komik dengan ID tersebut tidak ada.
+Data komik dengan `id: 2` berhasil ditampilkan.
+
+![GET komik by ID](docs/images/get-by-id-200.png)
+
+#### PUT ubah komik (200)
+
+Judul dan deskripsi komik `id: 2` berhasil diubah. Nilai `updatedAt` ikut berubah, sedangkan `createdAt` tetap.
+
+![PUT ubah komik](docs/images/put-200.png)
+
+#### DELETE hapus komik (200)
+
+Komik `id: 2` berhasil dihapus dan server mengembalikan pesan `Komik deleted successfully`.
+
+![DELETE hapus komik](docs/images/delete-200.png)
+
+### Kasus error (data tidak ditemukan)
+
+Permintaan ke `/api/komik/1` mengembalikan `404 Komik not found` karena komik dengan ID tersebut tidak ada. Ini membuktikan penanganan error pada controller berjalan dengan benar.
+
+#### GET komik by ID tidak ditemukan (404)
 
 ![GET komik by ID tidak ditemukan](docs/images/get-by-id-404.png)
 
-### PUT ubah komik, data tidak ditemukan (404)
-
-Mengubah komik dengan ID yang tidak ada mengembalikan `404 Komik not found`.
+#### PUT komik tidak ditemukan (404)
 
 ![PUT komik tidak ditemukan](docs/images/put-404.png)
 
-### DELETE hapus komik, data tidak ditemukan (404)
-
-Menghapus komik dengan ID yang tidak ada mengembalikan `404 Komik not found`.
+#### DELETE komik tidak ditemukan (404)
 
 ![DELETE komik tidak ditemukan](docs/images/delete-404.png)
 
